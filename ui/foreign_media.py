@@ -99,11 +99,12 @@ def render_foreign_media(df):
     )
     fig_vol.update_layout(
         template=PLOTLY_TEMPLATE,
-        height=300,
+        height=400,
         margin=CHART_MARGINS,
         xaxis_title="",
         yaxis_title="Articles per day",
         bargap=0.3,
+        xaxis=dict(rangeslider=dict(visible=True), type="date"),
     )
     fig_vol.update_traces(marker_line_width=0, opacity=0.85)
     st.plotly_chart(fig_vol, use_container_width=True)
@@ -131,11 +132,12 @@ def render_foreign_media(df):
     fig_sent.add_hline(y=0, line_dash="dash", line_color="rgba(0,0,0,0.15)")
     fig_sent.update_layout(
         template=PLOTLY_TEMPLATE,
-        height=300,
+        height=400,
         margin=CHART_MARGINS,
         xaxis_title="",
         yaxis_title="Sentiment Score",
         yaxis=dict(range=[-1, 1]),
+        xaxis=dict(rangeslider=dict(visible=True), type="date"),
         showlegend=False,
     )
     st.plotly_chart(fig_sent, use_container_width=True)

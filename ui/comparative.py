@@ -9,8 +9,8 @@ import pandas as pd
 from pipeline.sources import COUNTRY_NAMES
 
 PINK = "#E91E8C"
-RED = "#E41E20"
-BLUE = "#2E5EAA"
+ALBANIAN_MEDIA_COLOR = "#E91E8C"   # flamingo pink
+FOREIGN_MEDIA_COLOR = "#FF9800"    # warm amber
 
 THEME_LABELS = {
     "environmental": "Environmental",
@@ -156,7 +156,7 @@ def render_comparative(df):
             x=div_df["Albanian Media %"],
             name="Albanian Media",
             orientation="h",
-            marker_color=RED,
+            marker_color=ALBANIAN_MEDIA_COLOR,
             opacity=0.8,
         ))
         fig_div.add_trace(go.Bar(
@@ -164,7 +164,7 @@ def render_comparative(df):
             x=div_df["Foreign Media %"],
             name="Foreign Media",
             orientation="h",
-            marker_color=BLUE,
+            marker_color=FOREIGN_MEDIA_COLOR,
             opacity=0.8,
         ))
         fig_div.update_layout(
@@ -215,10 +215,11 @@ def render_comparative(df):
         )
         fig_time.update_layout(
             template="plotly_white",
-            height=400,
+            height=500,
             margin=dict(l=20, r=20, t=10, b=20),
             xaxis_title="",
             yaxis_title="Articles per day",
+            xaxis=dict(rangeslider=dict(visible=True), type="date"),
             legend=dict(orientation="h", yanchor="bottom", y=1.02),
         )
         st.plotly_chart(fig_time, use_container_width=True)
@@ -277,9 +278,9 @@ def render_comparative(df):
         st.markdown(f"""
         <div style="background:white; border:1px solid rgba(233,30,140,0.15); border-radius:10px;
             padding:16px 20px; line-height:1.7; color:#444;">
-            <strong style="color:{RED};">Albanian media</strong> primarily frames the protests as
+            <strong style="color:{ALBANIAN_MEDIA_COLOR};">Albanian media</strong> primarily frames the protests as
             <strong>{html_mod.escape(al_top_label)}</strong>, while
-            <strong style="color:{BLUE};">foreign media</strong> leads with
+            <strong style="color:{FOREIGN_MEDIA_COLOR};">foreign media</strong> leads with
             <strong>{html_mod.escape(fo_top_label)}</strong>.<br>
             The Kushner/Trump angle accounts for <strong>{fo_kushner_pct:.0f}%</strong> of foreign coverage
             vs <strong>{al_kushner_pct:.0f}%</strong> in Albanian media.<br>
