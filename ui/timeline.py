@@ -47,7 +47,8 @@ def render_article_card(row):
     if row.get("language") != "en" and title_orig and title_orig != title_en:
         orig_line = title_orig
 
-    city = row.get("diaspora_city", "")
+    city = row.get("diaspora_city") or ""
+    city = str(city) if city and str(city) != "nan" else ""
     city_badge = f'<span style="background:rgba(233,30,140,0.15); color:#E91E8C; padding:1px 8px; border-radius:10px; font-size:0.75em; margin-left:6px;">\U0001f4cd {html.escape(city)}</span>' if city else ""
 
     # Sentiment pill
